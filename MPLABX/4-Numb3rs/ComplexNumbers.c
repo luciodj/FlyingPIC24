@@ -2,7 +2,7 @@
 // ComplexNumbers.c
 //
 //
-#include <p24fxxxx.h>
+#include <config.h>
 
 __complex__ int z, k;
 int r, i;

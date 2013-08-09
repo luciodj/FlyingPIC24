@@ -10,8 +10,8 @@ CND_CONF=default
 CND_DISTDIR=dist
 TMPDIR=build/${CND_CONF}/${IMAGE_TYPE}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/12-Mandelbrot.${IMAGE_TYPE}.elf
-OUTPUT_BASENAME=12-Mandelbrot.${IMAGE_TYPE}.elf
+OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/12-Mandelbrot.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+OUTPUT_BASENAME=12-Mandelbrot.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 PACKAGE_TOP_DIR=12-mandelbrot/
 
 # Functions

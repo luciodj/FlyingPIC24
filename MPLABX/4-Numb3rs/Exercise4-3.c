@@ -3,7 +3,7 @@
 //
 // Exercise 4-3 use Timer2 for self timing divisions
 
-#include <p24fxxxx.h>
+#include <config.h>
 #include <math.h>
 
 unsigned    timeInt, timeLong, timeLL, timeFloat, timeDouble;

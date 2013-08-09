@@ -3,7 +3,7 @@
 **
 ** Hello1.c my first PIC24 program in C
 */
-#include <p24fxxxx.h>
+#include <xc.h>
 
 int main( void)
 {

@@ -3,6 +3,8 @@
 ** UART2 RS232 asynchronous communication demonstration
 */
 #include <config.h>
+#include <stdio.h>
+
 #include <CONU2.h>
 
 #define BUF_SIZE 128

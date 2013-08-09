@@ -3,7 +3,7 @@
 **
 ** 25LCXXX SPI Serial EEPROM  Access Library Module
 */
-#include <p24Fxxxx.h>
+#include <xc.h>
 #include <SEE.h>
 
 // I/O definitions for PIC24 + Explorer16 demo board

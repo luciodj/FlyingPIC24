@@ -8,13 +8,18 @@
 
 
 # Include project Makefile
+ifeq "${IGNORE_LOCAL}" "TRUE"
+# do not include local makefile. User is passing all local related variables already
+else
 include Makefile
+# Include makefile containing local settings
+ifeq "$(wildcard nbproject/Makefile-local-default.mk)" "nbproject/Makefile-local-default.mk"
+include nbproject/Makefile-local-default.mk
+endif
+endif
 
 # Environment
-SHELL=cmd.exe
-# Adding MPLAB X bin directory to path
-PATH:=C:/Program Files (x86)/Microchip/MPLABX/mplab_ide/mplab_ide/modules/../../bin/:$(PATH)
-MKDIR=gnumkdir -p
+MKDIR=mkdir -p
 RM=rm -f 
 MV=mv 
 CP=cp 
@@ -39,6 +44,9 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 # Distribution Directory
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
+# Source Files Quoted if spaced
+SOURCEFILES_QUOTED_IF_SPACED=../../lib/CONU2.c ../../lib/EX16.c ReadTest.c ../../lib/SDMMC.c ../../lib/fileio.c
+
 # Object Files Quoted if spaced
 OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/1445267685/CONU2.o ${OBJECTDIR}/_ext/1445267685/EX16.o ${OBJECTDIR}/ReadTest.o ${OBJECTDIR}/_ext/1445267685/SDMMC.o ${OBJECTDIR}/_ext/1445267685/fileio.o
 POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/1445267685/CONU2.o.d ${OBJECTDIR}/_ext/1445267685/EX16.o.d ${OBJECTDIR}/ReadTest.o.d ${OBJECTDIR}/_ext/1445267685/SDMMC.o.d ${OBJECTDIR}/_ext/1445267685/fileio.o.d
@@ -46,40 +54,94 @@ POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/1445267685/CONU2.o.d ${OBJECTDIR}/_ext/14452
 # Object Files
 OBJECTFILES=${OBJECTDIR}/_ext/1445267685/CONU2.o ${OBJECTDIR}/_ext/1445267685/EX16.o ${OBJECTDIR}/ReadTest.o ${OBJECTDIR}/_ext/1445267685/SDMMC.o ${OBJECTDIR}/_ext/1445267685/fileio.o
 
+# Source Files
+SOURCEFILES=../../lib/CONU2.c ../../lib/EX16.c ReadTest.c ../../lib/SDMMC.c ../../lib/fileio.c
+
 
 CFLAGS=
 ASFLAGS=
 LDLIBSOPTIONS=
 
-# Path to java used to run MPLAB X when this makefile was created
-MP_JAVA_PATH="C:\Program Files (x86)\Java\jre6/bin/"
-OS_CURRENT="$(shell uname -s)"
 ############# Tool locations ##########################################
 # If you copy a project from one host to another, the path where the  #
 # compiler is installed may be different.                             #
 # If you open this project with MPLAB X in the new host, this         #
 # makefile will be regenerated and the paths will be corrected.       #
 #######################################################################
-MP_CC="C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe"
-# MP_BC is not defined
-MP_AS="C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-as.exe"
-MP_LD="C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-ld.exe"
-MP_AR="C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-ar.exe"
-DEP_GEN=${MP_JAVA_PATH}java -jar "C:/Program Files (x86)/Microchip/MPLABX/mplab_ide/mplab_ide/modules/../../bin/extractobjectdependencies.jar" 
 # fixDeps replaces a bunch of sed/cat/printf statements that slow down the build
 FIXDEPS=fixDeps
-MP_CC_DIR="C:\Program Files (x86)\Microchip\MPLAB C30\bin"
-# MP_BC_DIR is not defined
-MP_AS_DIR="C:\Program Files (x86)\Microchip\MPLAB C30\bin"
-MP_LD_DIR="C:\Program Files (x86)\Microchip\MPLAB C30\bin"
-MP_AR_DIR="C:\Program Files (x86)\Microchip\MPLAB C30\bin"
-# MP_BC_DIR is not defined
 
 .build-conf:  ${BUILD_SUBPROJECTS}
 	${MAKE}  -f nbproject/Makefile-default.mk dist/${CND_CONF}/${IMAGE_TYPE}/14-FileIO.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 
 MP_PROCESSOR_OPTION=24FJ128GA010
-MP_LINKER_FILE_OPTION=,-Tp24FJ128GA010.gld
+MP_LINKER_FILE_OPTION=,--script=p24FJ128GA010.gld
+# ------------------------------------------------------------------------------------
+# Rules for buildStep: compile
+ifeq ($(TYPE_IMAGE), DEBUG_RUN)
+${OBJECTDIR}/_ext/1445267685/CONU2.o: ../../lib/CONU2.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/1445267685 
+	@${RM} ${OBJECTDIR}/_ext/1445267685/CONU2.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../lib/CONU2.c  -o ${OBJECTDIR}/_ext/1445267685/CONU2.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1445267685/CONU2.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1  -omf=elf -O0 -I"../../include" -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1445267685/CONU2.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/1445267685/EX16.o: ../../lib/EX16.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/1445267685 
+	@${RM} ${OBJECTDIR}/_ext/1445267685/EX16.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../lib/EX16.c  -o ${OBJECTDIR}/_ext/1445267685/EX16.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1445267685/EX16.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1  -omf=elf -O0 -I"../../include" -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1445267685/EX16.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/ReadTest.o: ReadTest.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/ReadTest.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ReadTest.c  -o ${OBJECTDIR}/ReadTest.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/ReadTest.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1  -omf=elf -O0 -I"../../include" -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/ReadTest.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/1445267685/SDMMC.o: ../../lib/SDMMC.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/1445267685 
+	@${RM} ${OBJECTDIR}/_ext/1445267685/SDMMC.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../lib/SDMMC.c  -o ${OBJECTDIR}/_ext/1445267685/SDMMC.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1445267685/SDMMC.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1  -omf=elf -O0 -I"../../include" -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1445267685/SDMMC.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/1445267685/fileio.o: ../../lib/fileio.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/1445267685 
+	@${RM} ${OBJECTDIR}/_ext/1445267685/fileio.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../lib/fileio.c  -o ${OBJECTDIR}/_ext/1445267685/fileio.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1445267685/fileio.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1  -omf=elf -O0 -I"../../include" -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1445267685/fileio.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+else
+${OBJECTDIR}/_ext/1445267685/CONU2.o: ../../lib/CONU2.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/1445267685 
+	@${RM} ${OBJECTDIR}/_ext/1445267685/CONU2.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../lib/CONU2.c  -o ${OBJECTDIR}/_ext/1445267685/CONU2.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1445267685/CONU2.o.d"      -g -omf=elf -O0 -I"../../include" -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1445267685/CONU2.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/1445267685/EX16.o: ../../lib/EX16.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/1445267685 
+	@${RM} ${OBJECTDIR}/_ext/1445267685/EX16.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../lib/EX16.c  -o ${OBJECTDIR}/_ext/1445267685/EX16.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1445267685/EX16.o.d"      -g -omf=elf -O0 -I"../../include" -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1445267685/EX16.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/ReadTest.o: ReadTest.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/ReadTest.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ReadTest.c  -o ${OBJECTDIR}/ReadTest.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/ReadTest.o.d"      -g -omf=elf -O0 -I"../../include" -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/ReadTest.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/1445267685/SDMMC.o: ../../lib/SDMMC.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/1445267685 
+	@${RM} ${OBJECTDIR}/_ext/1445267685/SDMMC.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../lib/SDMMC.c  -o ${OBJECTDIR}/_ext/1445267685/SDMMC.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1445267685/SDMMC.o.d"      -g -omf=elf -O0 -I"../../include" -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1445267685/SDMMC.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/1445267685/fileio.o: ../../lib/fileio.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/1445267685 
+	@${RM} ${OBJECTDIR}/_ext/1445267685/fileio.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../lib/fileio.c  -o ${OBJECTDIR}/_ext/1445267685/fileio.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1445267685/fileio.o.d"      -g -omf=elf -O0 -I"../../include" -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1445267685/fileio.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+endif
+
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: assemble
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
@@ -87,103 +149,43 @@ else
 endif
 
 # ------------------------------------------------------------------------------------
-# Rules for buildStep: assembleWithPreprocess
+# Rules for buildStep: assemblePreproc
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 else
-endif
-
-# ------------------------------------------------------------------------------------
-# Rules for buildStep: compile
-ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/_ext/1445267685/CONU2.o: ../../lib/CONU2.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR}/_ext/1445267685 
-	@${RM} ${OBJECTDIR}/_ext/1445267685/CONU2.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1445267685/CONU2.o.ok ${OBJECTDIR}/_ext/1445267685/CONU2.o.err 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1445267685/CONU2.o.d" $(SILENT) -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -I"../../include" -MMD -MF "${OBJECTDIR}/_ext/1445267685/CONU2.o.d" -o ${OBJECTDIR}/_ext/1445267685/CONU2.o ../../lib/CONU2.c  
-	
-${OBJECTDIR}/_ext/1445267685/EX16.o: ../../lib/EX16.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR}/_ext/1445267685 
-	@${RM} ${OBJECTDIR}/_ext/1445267685/EX16.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1445267685/EX16.o.ok ${OBJECTDIR}/_ext/1445267685/EX16.o.err 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1445267685/EX16.o.d" $(SILENT) -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -I"../../include" -MMD -MF "${OBJECTDIR}/_ext/1445267685/EX16.o.d" -o ${OBJECTDIR}/_ext/1445267685/EX16.o ../../lib/EX16.c  
-	
-${OBJECTDIR}/ReadTest.o: ReadTest.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR} 
-	@${RM} ${OBJECTDIR}/ReadTest.o.d 
-	@${RM} ${OBJECTDIR}/ReadTest.o.ok ${OBJECTDIR}/ReadTest.o.err 
-	@${FIXDEPS} "${OBJECTDIR}/ReadTest.o.d" $(SILENT) -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -I"../../include" -MMD -MF "${OBJECTDIR}/ReadTest.o.d" -o ${OBJECTDIR}/ReadTest.o ReadTest.c  
-	
-${OBJECTDIR}/_ext/1445267685/SDMMC.o: ../../lib/SDMMC.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR}/_ext/1445267685 
-	@${RM} ${OBJECTDIR}/_ext/1445267685/SDMMC.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1445267685/SDMMC.o.ok ${OBJECTDIR}/_ext/1445267685/SDMMC.o.err 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1445267685/SDMMC.o.d" $(SILENT) -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -I"../../include" -MMD -MF "${OBJECTDIR}/_ext/1445267685/SDMMC.o.d" -o ${OBJECTDIR}/_ext/1445267685/SDMMC.o ../../lib/SDMMC.c  
-	
-${OBJECTDIR}/_ext/1445267685/fileio.o: ../../lib/fileio.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR}/_ext/1445267685 
-	@${RM} ${OBJECTDIR}/_ext/1445267685/fileio.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1445267685/fileio.o.ok ${OBJECTDIR}/_ext/1445267685/fileio.o.err 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1445267685/fileio.o.d" $(SILENT) -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -I"../../include" -MMD -MF "${OBJECTDIR}/_ext/1445267685/fileio.o.d" -o ${OBJECTDIR}/_ext/1445267685/fileio.o ../../lib/fileio.c  
-	
-else
-${OBJECTDIR}/_ext/1445267685/CONU2.o: ../../lib/CONU2.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR}/_ext/1445267685 
-	@${RM} ${OBJECTDIR}/_ext/1445267685/CONU2.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1445267685/CONU2.o.ok ${OBJECTDIR}/_ext/1445267685/CONU2.o.err 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1445267685/CONU2.o.d" $(SILENT) -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -I"../../include" -MMD -MF "${OBJECTDIR}/_ext/1445267685/CONU2.o.d" -o ${OBJECTDIR}/_ext/1445267685/CONU2.o ../../lib/CONU2.c  
-	
-${OBJECTDIR}/_ext/1445267685/EX16.o: ../../lib/EX16.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR}/_ext/1445267685 
-	@${RM} ${OBJECTDIR}/_ext/1445267685/EX16.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1445267685/EX16.o.ok ${OBJECTDIR}/_ext/1445267685/EX16.o.err 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1445267685/EX16.o.d" $(SILENT) -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -I"../../include" -MMD -MF "${OBJECTDIR}/_ext/1445267685/EX16.o.d" -o ${OBJECTDIR}/_ext/1445267685/EX16.o ../../lib/EX16.c  
-	
-${OBJECTDIR}/ReadTest.o: ReadTest.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR} 
-	@${RM} ${OBJECTDIR}/ReadTest.o.d 
-	@${RM} ${OBJECTDIR}/ReadTest.o.ok ${OBJECTDIR}/ReadTest.o.err 
-	@${FIXDEPS} "${OBJECTDIR}/ReadTest.o.d" $(SILENT) -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -I"../../include" -MMD -MF "${OBJECTDIR}/ReadTest.o.d" -o ${OBJECTDIR}/ReadTest.o ReadTest.c  
-	
-${OBJECTDIR}/_ext/1445267685/SDMMC.o: ../../lib/SDMMC.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR}/_ext/1445267685 
-	@${RM} ${OBJECTDIR}/_ext/1445267685/SDMMC.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1445267685/SDMMC.o.ok ${OBJECTDIR}/_ext/1445267685/SDMMC.o.err 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1445267685/SDMMC.o.d" $(SILENT) -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -I"../../include" -MMD -MF "${OBJECTDIR}/_ext/1445267685/SDMMC.o.d" -o ${OBJECTDIR}/_ext/1445267685/SDMMC.o ../../lib/SDMMC.c  
-	
-${OBJECTDIR}/_ext/1445267685/fileio.o: ../../lib/fileio.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR}/_ext/1445267685 
-	@${RM} ${OBJECTDIR}/_ext/1445267685/fileio.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1445267685/fileio.o.ok ${OBJECTDIR}/_ext/1445267685/fileio.o.err 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1445267685/fileio.o.d" $(SILENT) -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -I"../../include" -MMD -MF "${OBJECTDIR}/_ext/1445267685/fileio.o.d" -o ${OBJECTDIR}/_ext/1445267685/fileio.o ../../lib/fileio.c  
-	
 endif
 
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: link
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-dist/${CND_CONF}/${IMAGE_TYPE}/14-FileIO.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk
+dist/${CND_CONF}/${IMAGE_TYPE}/14-FileIO.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk    
 	@${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_CC} $(MP_EXTRA_LD_PRE)  -omf=elf -mcpu=$(MP_PROCESSOR_OPTION)  -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -o dist/${CND_CONF}/${IMAGE_TYPE}/14-FileIO.${IMAGE_TYPE}.${OUTPUT_SUFFIX} ${OBJECTFILES_QUOTED_IF_SPACED}        -Wl,--defsym=__MPLAB_BUILD=1,--heap=1024,--no-check-sections,-L"../../../../Program Files/Microchip/MPLAB C30/lib",-Map="$(TARGETBASE).map",--report-mem,--defsym=__ICD2RAM=1$(MP_EXTRA_LD_POST)$(MP_LINKER_FILE_OPTION),--defsym=__MPLAB_DEBUG=1,--defsym=__ICD2RAM=1,--defsym=__DEBUG=1,--defsym=__MPLAB_DEBUGGER_ICD3=1
+	${MP_CC} $(MP_EXTRA_LD_PRE)  -o dist/${CND_CONF}/${IMAGE_TYPE}/14-FileIO.${IMAGE_TYPE}.${OUTPUT_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}      -mcpu=$(MP_PROCESSOR_OPTION)        -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1  -omf=elf -Wl,--defsym=__MPLAB_BUILD=1,--defsym=__ICD2RAM=1,--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,--defsym=__MPLAB_DEBUGGER_ICD3=1,$(MP_LINKER_FILE_OPTION),--heap=1024,--no-check-sections,--data-init,--pack-data,--handles,--isr,--no-gc-sections,--fill-upper=0,--stackguard=16,--defsym,__ICD2RAM=1,--library-path="../../../../Program Files/Microchip/MPLAB C30/lib",--no-force-link,--smart-io,-Map="$(TARGETBASE).map"$(MP_EXTRA_LD_POST) 
+	
 else
-dist/${CND_CONF}/${IMAGE_TYPE}/14-FileIO.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk
+dist/${CND_CONF}/${IMAGE_TYPE}/14-FileIO.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk   
 	@${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_CC} $(MP_EXTRA_LD_PRE)  -omf=elf -mcpu=$(MP_PROCESSOR_OPTION)  -o dist/${CND_CONF}/${IMAGE_TYPE}/14-FileIO.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX} ${OBJECTFILES_QUOTED_IF_SPACED}        -Wl,--defsym=__MPLAB_BUILD=1,--heap=1024,--no-check-sections,-L"../../../../Program Files/Microchip/MPLAB C30/lib",-Map="$(TARGETBASE).map",--report-mem,--defsym=__ICD2RAM=1$(MP_EXTRA_LD_POST)$(MP_LINKER_FILE_OPTION)
-	${MP_CC_DIR}\\pic30-bin2hex dist/${CND_CONF}/${IMAGE_TYPE}/14-FileIO.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX} -omf=elf
+	${MP_CC} $(MP_EXTRA_LD_PRE)  -o dist/${CND_CONF}/${IMAGE_TYPE}/14-FileIO.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}      -mcpu=$(MP_PROCESSOR_OPTION)        -omf=elf -Wl,--defsym=__MPLAB_BUILD=1,$(MP_LINKER_FILE_OPTION),--heap=1024,--no-check-sections,--data-init,--pack-data,--handles,--isr,--no-gc-sections,--fill-upper=0,--stackguard=16,--defsym,__ICD2RAM=1,--library-path="../../../../Program Files/Microchip/MPLAB C30/lib",--no-force-link,--smart-io,-Map="$(TARGETBASE).map"$(MP_EXTRA_LD_POST) 
+	${MP_CC_DIR}/xc16-bin2hex dist/${CND_CONF}/${IMAGE_TYPE}/14-FileIO.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX} -a  -omf=elf 
+	
 endif
 
 
 # Subprojects
 .build-subprojects:
 
+
+# Subprojects
+.clean-subprojects:
+
 # Clean Targets
-.clean-conf:
+.clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r build/default
 	${RM} -r dist/default
 
 # Enable dependency checking
 .dep.inc: .depcheck-impl
 
-DEPFILES=$(shell mplabwildcard ${POSSIBLE_DEPFILES})
+DEPFILES=$(shell "${PATH_TO_IDE_BIN}"mplabwildcard ${POSSIBLE_DEPFILES})
 ifneq (${DEPFILES},)
 include ${DEPFILES}
 endif

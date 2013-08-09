@@ -7,7 +7,7 @@
 #ifndef _EX16
 #define _EX16
 
-#include <p24fxxxx.h>
+#include <xc.h>
 
 #if defined(__PIC24FJ256GB110__) || defined(__PIC24FJ256GA110__)
 #include <pps.h>

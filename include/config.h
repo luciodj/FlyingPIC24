@@ -3,7 +3,7 @@
 ** 
 ** "Flying PIC24" projects device configuration
 */
-#include <p24fxxxx.h>
+#include <xc.h>
 
 // this is the default configuration for all book's projects 
 _CONFIG1( JTAGEN_OFF        // disable JTAG interface

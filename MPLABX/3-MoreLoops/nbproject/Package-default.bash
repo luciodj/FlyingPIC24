@@ -10,8 +10,8 @@ CND_CONF=default
 CND_DISTDIR=dist
 TMPDIR=build/${CND_CONF}/${IMAGE_TYPE}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/3-MoreLoops.${IMAGE_TYPE}.elf
-OUTPUT_BASENAME=3-MoreLoops.${IMAGE_TYPE}.elf
+OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/3-MoreLoops.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+OUTPUT_BASENAME=3-MoreLoops.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 PACKAGE_TOP_DIR=3-moreloops/
 
 # Functions

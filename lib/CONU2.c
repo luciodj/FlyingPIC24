@@ -3,7 +3,7 @@
 ** Basic CONSOLE I/O for Explorer16 demonstration board
 */
 
-#include <p24fxxxx.h>
+#include <xc.h>
 #include <CONU2.h>
 
 // I/O definitions for the Explorer16

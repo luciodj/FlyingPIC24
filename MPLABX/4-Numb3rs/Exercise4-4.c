@@ -4,7 +4,7 @@
 // Exercise 4-4 self timing complex math
 //
 
-#include <p24fxxxx.h>
+#include <config.h>
 
 unsigned    timeInt, timeLong, timeLL, timeFloat, timeDouble;
 __complex__ int z, k;

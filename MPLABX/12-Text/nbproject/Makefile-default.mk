@@ -8,56 +8,103 @@
 
 
 # Include project Makefile
+ifeq "${IGNORE_LOCAL}" "TRUE"
+# do not include local makefile. User is passing all local related variables already
+else
 include Makefile
+# Include makefile containing local settings
+ifeq "$(wildcard nbproject/Makefile-local-default.mk)" "nbproject/Makefile-local-default.mk"
+include nbproject/Makefile-local-default.mk
+endif
+endif
 
 # Environment
 MKDIR=mkdir -p
 RM=rm -f 
+MV=mv 
 CP=cp 
+
 # Macros
 CND_CONF=default
-
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 IMAGE_TYPE=debug
-FINAL_IMAGE=dist/${CND_CONF}/${IMAGE_TYPE}/12-Text.${IMAGE_TYPE}.elf
+OUTPUT_SUFFIX=elf
+DEBUGGABLE_SUFFIX=elf
+FINAL_IMAGE=dist/${CND_CONF}/${IMAGE_TYPE}/12-Text.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 else
 IMAGE_TYPE=production
-FINAL_IMAGE=dist/${CND_CONF}/${IMAGE_TYPE}/12-Text.${IMAGE_TYPE}.elf
+OUTPUT_SUFFIX=hex
+DEBUGGABLE_SUFFIX=elf
+FINAL_IMAGE=dist/${CND_CONF}/${IMAGE_TYPE}/12-Text.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 endif
+
 # Object Directory
 OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
+
 # Distribution Directory
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
+# Source Files Quoted if spaced
+SOURCEFILES_QUOTED_IF_SPACED=TextTest.c ../../lib/text.c
+
+# Object Files Quoted if spaced
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/TextTest.o ${OBJECTDIR}/_ext/1445267685/text.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/TextTest.o.d ${OBJECTDIR}/_ext/1445267685/text.o.d
+
 # Object Files
 OBJECTFILES=${OBJECTDIR}/TextTest.o ${OBJECTDIR}/_ext/1445267685/text.o
+
+# Source Files
+SOURCEFILES=TextTest.c ../../lib/text.c
 
 
 CFLAGS=
 ASFLAGS=
 LDLIBSOPTIONS=
 
-OS_ORIGINAL="MINGW32_NT-6.1"
-OS_CURRENT="$(shell uname -s)"
 ############# Tool locations ##########################################
 # If you copy a project from one host to another, the path where the  #
 # compiler is installed may be different.                             #
 # If you open this project with MPLAB X in the new host, this         #
 # makefile will be regenerated and the paths will be corrected.       #
 #######################################################################
-MP_CC=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin\\pic30-gcc.exe
-MP_AS=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin\\pic30-as.exe
-MP_LD=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin\\pic30-ld.exe
-MP_AR=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin\\pic30-ar.exe
-MP_CC_DIR=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin
-MP_AS_DIR=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin
-MP_LD_DIR=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin
-MP_AR_DIR=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin
-.build-conf: ${BUILD_SUBPROJECTS}
-ifneq ($(OS_CURRENT),$(OS_ORIGINAL))
-	@echo "***** WARNING: This make file contains OS dependent code. The OS this makefile is being run is different from the OS it was created in."
+# fixDeps replaces a bunch of sed/cat/printf statements that slow down the build
+FIXDEPS=fixDeps
+
+.build-conf:  ${BUILD_SUBPROJECTS}
+	${MAKE}  -f nbproject/Makefile-default.mk dist/${CND_CONF}/${IMAGE_TYPE}/12-Text.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+
+MP_PROCESSOR_OPTION=24FJ128GA010
+MP_LINKER_FILE_OPTION=,--script=p24FJ128GA010.gld
+# ------------------------------------------------------------------------------------
+# Rules for buildStep: compile
+ifeq ($(TYPE_IMAGE), DEBUG_RUN)
+${OBJECTDIR}/TextTest.o: TextTest.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/TextTest.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  TextTest.c  -o ${OBJECTDIR}/TextTest.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/TextTest.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1  -omf=elf -fno-short-double -O1 -I"../../include" -msmart-io=1 -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/TextTest.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/1445267685/text.o: ../../lib/text.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/1445267685 
+	@${RM} ${OBJECTDIR}/_ext/1445267685/text.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../lib/text.c  -o ${OBJECTDIR}/_ext/1445267685/text.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1445267685/text.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1  -omf=elf -fno-short-double -O1 -I"../../include" -msmart-io=1 -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1445267685/text.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+else
+${OBJECTDIR}/TextTest.o: TextTest.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/TextTest.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  TextTest.c  -o ${OBJECTDIR}/TextTest.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/TextTest.o.d"      -g -omf=elf -fno-short-double -O1 -I"../../include" -msmart-io=1 -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/TextTest.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/1445267685/text.o: ../../lib/text.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/1445267685 
+	@${RM} ${OBJECTDIR}/_ext/1445267685/text.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../lib/text.c  -o ${OBJECTDIR}/_ext/1445267685/text.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1445267685/text.o.d"      -g -omf=elf -fno-short-double -O1 -I"../../include" -msmart-io=1 -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1445267685/text.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 endif
-	${MAKE}  -f nbproject/Makefile-default.mk dist/${CND_CONF}/${IMAGE_TYPE}/12-Text.${IMAGE_TYPE}.elf
 
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: assemble
@@ -66,93 +113,43 @@ else
 endif
 
 # ------------------------------------------------------------------------------------
-# Rules for buildStep: compile
+# Rules for buildStep: assemblePreproc
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/TextTest.o: TextTest.c  nbproject/Makefile-${CND_CONF}.mk
-	${MKDIR} ${OBJECTDIR} 
-	${RM} ${OBJECTDIR}/TextTest.o.d 
-	${MP_CC} -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -omf=elf -x c -c -mcpu=24FJ128GA010 -I"../../include" -O1 -MMD -MF ${OBJECTDIR}/TextTest.o.d -o ${OBJECTDIR}/TextTest.o TextTest.c 
-ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
-	 sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/TextTest.o.d > ${OBJECTDIR}/TextTest.o.tmp
-	${RM} ${OBJECTDIR}/TextTest.o.d 
-	${CP} ${OBJECTDIR}/TextTest.o.tmp ${OBJECTDIR}/TextTest.o.d 
-	${RM} ${OBJECTDIR}/TextTest.o.tmp}
-else 
-	 sed -e 's/\"//g' ${OBJECTDIR}/TextTest.o.d > ${OBJECTDIR}/TextTest.o.tmp
-	${RM} ${OBJECTDIR}/TextTest.o.d 
-	${CP} ${OBJECTDIR}/TextTest.o.tmp ${OBJECTDIR}/TextTest.o.d 
-	${RM} ${OBJECTDIR}/TextTest.o.tmp}
-endif
-${OBJECTDIR}/_ext/1445267685/text.o: ../../lib/text.c  nbproject/Makefile-${CND_CONF}.mk
-	${MKDIR} ${OBJECTDIR}/_ext/1445267685 
-	${RM} ${OBJECTDIR}/_ext/1445267685/text.o.d 
-	${MP_CC} -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -omf=elf -x c -c -mcpu=24FJ128GA010 -I"../../include" -O1 -MMD -MF ${OBJECTDIR}/_ext/1445267685/text.o.d -o ${OBJECTDIR}/_ext/1445267685/text.o ../../lib/text.c 
-ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
-	 sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1445267685/text.o.d > ${OBJECTDIR}/_ext/1445267685/text.o.tmp
-	${RM} ${OBJECTDIR}/_ext/1445267685/text.o.d 
-	${CP} ${OBJECTDIR}/_ext/1445267685/text.o.tmp ${OBJECTDIR}/_ext/1445267685/text.o.d 
-	${RM} ${OBJECTDIR}/_ext/1445267685/text.o.tmp}
-else 
-	 sed -e 's/\"//g' ${OBJECTDIR}/_ext/1445267685/text.o.d > ${OBJECTDIR}/_ext/1445267685/text.o.tmp
-	${RM} ${OBJECTDIR}/_ext/1445267685/text.o.d 
-	${CP} ${OBJECTDIR}/_ext/1445267685/text.o.tmp ${OBJECTDIR}/_ext/1445267685/text.o.d 
-	${RM} ${OBJECTDIR}/_ext/1445267685/text.o.tmp}
-endif
 else
-${OBJECTDIR}/TextTest.o: TextTest.c  nbproject/Makefile-${CND_CONF}.mk
-	${MKDIR} ${OBJECTDIR} 
-	${RM} ${OBJECTDIR}/TextTest.o.d 
-	${MP_CC}  -omf=elf -x c -c -mcpu=24FJ128GA010 -I"../../include" -O1 -MMD -MF ${OBJECTDIR}/TextTest.o.d -o ${OBJECTDIR}/TextTest.o TextTest.c 
-ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
-	 sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/TextTest.o.d > ${OBJECTDIR}/TextTest.o.tmp
-	${RM} ${OBJECTDIR}/TextTest.o.d 
-	${CP} ${OBJECTDIR}/TextTest.o.tmp ${OBJECTDIR}/TextTest.o.d 
-	${RM} ${OBJECTDIR}/TextTest.o.tmp}
-else 
-	 sed -e 's/\"//g' ${OBJECTDIR}/TextTest.o.d > ${OBJECTDIR}/TextTest.o.tmp
-	${RM} ${OBJECTDIR}/TextTest.o.d 
-	${CP} ${OBJECTDIR}/TextTest.o.tmp ${OBJECTDIR}/TextTest.o.d 
-	${RM} ${OBJECTDIR}/TextTest.o.tmp}
-endif
-${OBJECTDIR}/_ext/1445267685/text.o: ../../lib/text.c  nbproject/Makefile-${CND_CONF}.mk
-	${MKDIR} ${OBJECTDIR}/_ext/1445267685 
-	${RM} ${OBJECTDIR}/_ext/1445267685/text.o.d 
-	${MP_CC}  -omf=elf -x c -c -mcpu=24FJ128GA010 -I"../../include" -O1 -MMD -MF ${OBJECTDIR}/_ext/1445267685/text.o.d -o ${OBJECTDIR}/_ext/1445267685/text.o ../../lib/text.c 
-ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
-	 sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1445267685/text.o.d > ${OBJECTDIR}/_ext/1445267685/text.o.tmp
-	${RM} ${OBJECTDIR}/_ext/1445267685/text.o.d 
-	${CP} ${OBJECTDIR}/_ext/1445267685/text.o.tmp ${OBJECTDIR}/_ext/1445267685/text.o.d 
-	${RM} ${OBJECTDIR}/_ext/1445267685/text.o.tmp}
-else 
-	 sed -e 's/\"//g' ${OBJECTDIR}/_ext/1445267685/text.o.d > ${OBJECTDIR}/_ext/1445267685/text.o.tmp
-	${RM} ${OBJECTDIR}/_ext/1445267685/text.o.d 
-	${CP} ${OBJECTDIR}/_ext/1445267685/text.o.tmp ${OBJECTDIR}/_ext/1445267685/text.o.d 
-	${RM} ${OBJECTDIR}/_ext/1445267685/text.o.tmp}
-endif
 endif
 
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: link
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-dist/${CND_CONF}/${IMAGE_TYPE}/12-Text.${IMAGE_TYPE}.elf: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk
-	${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_CC}  -omf=elf  -mcpu=24FJ128GA010  -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -o dist/${CND_CONF}/${IMAGE_TYPE}/12-Text.${IMAGE_TYPE}.elf ${OBJECTFILES}      -Wl,--defsym=__MPLAB_BUILD=1,-Tp24FJ128GA010.gld,--defsym=__MPLAB_DEBUG=1,--defsym=__ICD2RAM=1,--defsym=__DEBUG=1,--defsym=__MPLAB_DEBUGGER_ICD3=1,--heap=128,-L"../../../../Program Files/Microchip/MPLAB C30/lib",-Map="$(TARGETBASE).map",--report-mem
+dist/${CND_CONF}/${IMAGE_TYPE}/12-Text.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk    
+	@${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
+	${MP_CC} $(MP_EXTRA_LD_PRE)  -o dist/${CND_CONF}/${IMAGE_TYPE}/12-Text.${IMAGE_TYPE}.${OUTPUT_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}      -mcpu=$(MP_PROCESSOR_OPTION)        -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1  -omf=elf -Wl,--defsym=__MPLAB_BUILD=1,--defsym=__ICD2RAM=1,--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,--defsym=__MPLAB_DEBUGGER_ICD3=1,$(MP_LINKER_FILE_OPTION),--heap=128,--no-check-sections,--data-init,--pack-data,--handles,--isr,--no-gc-sections,--fill-upper=0,--stackguard=16,--library-path="../../../../Program Files/Microchip/MPLAB C30/lib",--no-force-link,--smart-io$(MP_EXTRA_LD_POST) 
+	
 else
-dist/${CND_CONF}/${IMAGE_TYPE}/12-Text.${IMAGE_TYPE}.elf: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk
-	${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_CC}  -omf=elf  -mcpu=24FJ128GA010  -o dist/${CND_CONF}/${IMAGE_TYPE}/12-Text.${IMAGE_TYPE}.elf ${OBJECTFILES}      -Wl,--defsym=__MPLAB_BUILD=1,-Tp24FJ128GA010.gld,--heap=128,-L"../../../../Program Files/Microchip/MPLAB C30/lib",-Map="$(TARGETBASE).map",--report-mem
-	${MP_CC_DIR}\\pic30-bin2hex dist/${CND_CONF}/${IMAGE_TYPE}/12-Text.${IMAGE_TYPE}.elf -omf=elf
+dist/${CND_CONF}/${IMAGE_TYPE}/12-Text.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk   
+	@${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
+	${MP_CC} $(MP_EXTRA_LD_PRE)  -o dist/${CND_CONF}/${IMAGE_TYPE}/12-Text.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}      -mcpu=$(MP_PROCESSOR_OPTION)        -omf=elf -Wl,--defsym=__MPLAB_BUILD=1,$(MP_LINKER_FILE_OPTION),--heap=128,--no-check-sections,--data-init,--pack-data,--handles,--isr,--no-gc-sections,--fill-upper=0,--stackguard=16,--library-path="../../../../Program Files/Microchip/MPLAB C30/lib",--no-force-link,--smart-io$(MP_EXTRA_LD_POST) 
+	${MP_CC_DIR}/xc16-bin2hex dist/${CND_CONF}/${IMAGE_TYPE}/12-Text.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX} -a  -omf=elf 
+	
 endif
 
 
 # Subprojects
 .build-subprojects:
 
+
+# Subprojects
+.clean-subprojects:
+
 # Clean Targets
-.clean-conf:
+.clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r build/default
-	${RM} -r dist
+	${RM} -r dist/default
+
 # Enable dependency checking
 .dep.inc: .depcheck-impl
 
-include .dep.inc
+DEPFILES=$(shell "${PATH_TO_IDE_BIN}"mplabwildcard ${POSSIBLE_DEPFILES})
+ifneq (${DEPFILES},)
+include ${DEPFILES}
+endif

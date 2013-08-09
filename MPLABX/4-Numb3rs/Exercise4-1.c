@@ -3,7 +3,7 @@
 //
 // Exercise 4-1 use Timer2 for self timing multiplications
 
-#include <p24fxxxx.h>
+#include <config.c>
 
 unsigned    timeInt, timeLong, timeLL, timeFloat, timeDouble;
 
