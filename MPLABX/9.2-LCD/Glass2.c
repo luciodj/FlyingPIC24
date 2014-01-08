@@ -3,7 +3,6 @@
 ** Playing with an LCD display
 */
 
-#include <p24fxxxx.h>
 #include <config.h>
 #include <LCD.h>
 

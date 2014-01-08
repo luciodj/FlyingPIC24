@@ -2,7 +2,7 @@
 ** LCD.h
 **
 */
-#include <p24fxxxx.h>
+#include <xc.h>
 
 #define LCDDATA 1
 #define LCDCMD  0

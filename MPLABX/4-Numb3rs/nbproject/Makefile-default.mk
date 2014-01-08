@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=Numbers.c
+SOURCEFILES_QUOTED_IF_SPACED=ComplexNumbers.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Numbers.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/Numbers.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/ComplexNumbers.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/ComplexNumbers.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/Numbers.o
+OBJECTFILES=${OBJECTDIR}/ComplexNumbers.o
 
 # Source Files
-SOURCEFILES=Numbers.c
+SOURCEFILES=ComplexNumbers.c
 
 
 CFLAGS=
@@ -79,18 +79,20 @@ MP_LINKER_FILE_OPTION=,--script=p24FJ128GA010.gld
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/Numbers.o: Numbers.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/ComplexNumbers.o: ComplexNumbers.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
-	@${RM} ${OBJECTDIR}/Numbers.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  Numbers.c  -o ${OBJECTDIR}/Numbers.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Numbers.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1  -omf=elf -fno-short-double -O0 -I"../../include" -msmart-io=1 -msfr-warn=off
-	@${FIXDEPS} "${OBJECTDIR}/Numbers.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	@${RM} ${OBJECTDIR}/ComplexNumbers.o.d 
+	@${RM} ${OBJECTDIR}/ComplexNumbers.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ComplexNumbers.c  -o ${OBJECTDIR}/ComplexNumbers.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/ComplexNumbers.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1  -omf=elf -fno-short-double -O0 -I"../../include" -msmart-io=1 -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/ComplexNumbers.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 else
-${OBJECTDIR}/Numbers.o: Numbers.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/ComplexNumbers.o: ComplexNumbers.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
-	@${RM} ${OBJECTDIR}/Numbers.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  Numbers.c  -o ${OBJECTDIR}/Numbers.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Numbers.o.d"      -g -omf=elf -fno-short-double -O0 -I"../../include" -msmart-io=1 -msfr-warn=off
-	@${FIXDEPS} "${OBJECTDIR}/Numbers.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	@${RM} ${OBJECTDIR}/ComplexNumbers.o.d 
+	@${RM} ${OBJECTDIR}/ComplexNumbers.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ComplexNumbers.c  -o ${OBJECTDIR}/ComplexNumbers.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/ComplexNumbers.o.d"      -g -omf=elf -fno-short-double -O0 -I"../../include" -msmart-io=1 -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/ComplexNumbers.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 

@@ -3,7 +3,7 @@
 ** LCD.c
 **
 */
-#include <p24fxxxx.h>
+
 #include <LCD.h>
 
 void InitLCD( void)

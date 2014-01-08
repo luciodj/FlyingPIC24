@@ -5,7 +5,7 @@
 
 int         i1, i2, i3;
 long        x1, x2, x3;
-long long   y1, y2, y3;
+long long   xx1, xx2, xx3;
 float       f1,f2, f3;
 long double d1, d2, d3;
 
@@ -23,10 +23,10 @@ main()
     TMR1 = 0;           // clear the timer
     x3 = x1 * x2;
 
-    y1 = 0x0123456789ABCDEFLL;   // testing 64-bit integers
-    y2 = 0xFEDCBA9876543210LL;
+    xx1 = 0x0123456789ABCDEFLL;   // testing 64-bit integers
+    xx2 = 0xFEDCBA9876543210LL;
     TMR1 = 0;                     // clear the timer
-    y3 = y1 * y2;
+    xx3 = xx1 * xx2;
 
     f1 = 12.34;     // testing single precision floating point
     f2 = 56.78; 
